@@ -1,3 +1,3 @@
-# Advent of Code 2020
+# Advent of Code
 
-My solutions to the Advent of Code 2020 competition! 
+All of my solutions to the Advent of Code competition starting from (2020)! 
