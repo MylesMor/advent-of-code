@@ -6,19 +6,16 @@ def read_file(filename):
 
 def toboggan_trajectory(rows, right, down):
     '''Returns the number of trees encountered on a map with a specified slope.'''
-    currentPosRight, currentPosDown = 0, 0
+    current_pos_right, current_pos_down = 0, 0
     num_trees = 0
     for row in rows:
-        currentPosDown += down
-        currentPosRight += right
-        # If the end of a row has been reached
-        if (currentPosRight+1 > len(row)):
-            # Carry the remainder of the counter over to the start of a new row
-            currentPosRight = abs(currentPosRight - len(row))
+        current_pos_down += down
+        # Carry the remainder of the counter over to the start of a new row if required
+        current_pos_right = (current_pos_right + right) % len(row)
         # Break if end of the rows array has been reached
-        if (currentPosDown+1 > len(rows)):
+        if (current_pos_down+1 > len(rows)):
             break
-        if rows[currentPosDown][currentPosRight] == "#":
+        if rows[current_pos_down][current_pos_right] == "#":
             num_trees += 1
     return num_trees
 
