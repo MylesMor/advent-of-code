@@ -1,4 +1,5 @@
 import re
+import timeit
 
 def read_file(filename):
     '''Returns a list of passport dictionaries.'''
@@ -69,6 +70,8 @@ def check_data(passport, validate_data):
 
 
 if __name__ == "__main__":
+    start_time = timeit.default_timer()
     passports = read_file("input.txt")
     print("Challenge 1 Answer: " + str(passport_processing(passports, False)))
     print("Challenge 2 Answer: " + str(passport_processing(passports, True)))
+    print("Time taken: %s" % (timeit.default_timer() - start_time))
