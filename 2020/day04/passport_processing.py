@@ -57,13 +57,13 @@ def check_data(passport, validate_data):
             return False
         if not re.match("202[0-9]|2030", passport['eyr']):
             return False
-        if not re.match("1[5-8][0-9]cm|19[0-3]cm|6[0-9]in|59in|7[0-6]in", passport['hgt']):
+        if not re.match("(1[5-8][0-9]|19[0-3])cm|(6[0-9]|59|7[0-6])in", passport['hgt']):
             return False
-        if not re.match("#[0-9a-f]{6,6}$", passport['hcl']):
+        if not re.match("^#[0-9a-f]{6}$", passport['hcl']):
             return False
         if not re.match("amb|blu|brn|gry|grn|hzl|oth", passport['ecl']):
             return False
-        if not re.match("^[0-9]{9,9}$", passport['pid']):
+        if not re.match("^[0-9]{9}$", passport['pid']):
             return False 
     return True
 
