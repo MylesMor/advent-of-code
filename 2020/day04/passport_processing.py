@@ -4,13 +4,16 @@ def read_file(filename):
     '''Returns a list of passport dictionaries.'''
     with open(filename, "r") as file:
         lines = file.readlines()
+        # Adds final newline character to retrieve last passport
         lines.append("\n")
         passport_list = []
         one_passport = ""
         for line in lines:
             if line != "\n":
+                # Add the different lines of the passport together
                 one_passport += line.replace("\n", " ")
                 continue
+            # Create dictionary of fields for each passport
             data_fields = one_passport[:-1].split(" ")
             passport_dict = {}
             for data in data_fields:
