@@ -52,17 +52,17 @@ def check_data(passport, validate_data):
     if len(passport) < 8 and "cid" in passport:
         return False
     if validate_data:
-        if not re.match("19[2-9][0-9]|200[0-2]", passport['byr']):
+        if not re.match("^(19[2-9][0-9]|200[0-2])$", passport['byr']):
             return False
-        if not re.match("201[0-9]|2020", passport['iyr']):
+        if not re.match("^(201[0-9]|2020)$", passport['iyr']):
             return False
-        if not re.match("202[0-9]|2030", passport['eyr']):
+        if not re.match("^(202[0-9]|2030)$", passport['eyr']):
             return False
-        if not re.match("(1[5-8][0-9]|19[0-3])cm|(6[0-9]|59|7[0-6])in", passport['hgt']):
+        if not re.match("^((1[5-8][0-9]|19[0-3])cm|(6[0-9]|59|7[0-6])in)$", passport['hgt']):
             return False
         if not re.match("^#[0-9a-f]{6}$", passport['hcl']):
             return False
-        if not re.match("amb|blu|brn|gry|grn|hzl|oth", passport['ecl']):
+        if not re.match("^(amb|blu|brn|gry|grn|hzl|oth)$", passport['ecl']):
             return False
         if not re.match("^[0-9]{9}$", passport['pid']):
             return False 
