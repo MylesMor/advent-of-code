@@ -32,7 +32,7 @@ def binary_boarding_improved(instructions):
     for line in instructions:
         binary_line = line.replace("F", "0").replace("B", "1").replace("R", "1").replace("L", "0")
         row_number = int(binary_line[:7], 2)
-        column_number = int(binary_line[-4:], 2)
+        column_number = int(binary_line[7:], 2)
         seat_ids.append(int((row_number * 8) + column_number))
     return seat_ids
 
