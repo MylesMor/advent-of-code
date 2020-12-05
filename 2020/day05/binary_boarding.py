@@ -8,7 +8,7 @@ def read_file(filename):
 
 
 def binary_boarding(instructions, number_of_rows, number_of_columns):
-    '''Identifies the seat number from a list of instructions.'''
+    '''Identifies seat numbers from a list of instructions.'''
     seat_ids = []
     for line in instructions:
         max_number_rows, max_number_cols = number_of_rows, number_of_columns
@@ -26,6 +26,17 @@ def binary_boarding(instructions, number_of_rows, number_of_columns):
     return seat_ids
 
 
+def binary_boarding_improved(instructions):
+    '''Improvement over binary_boarding by converting the instruction into binary.'''
+    seat_ids = []
+    for line in instructions:
+        binary_line = line.replace("F", "0").replace("B", "1").replace("R", "1").replace("L", "0")
+        row_number = int(binary_line[:7], 2)
+        column_number = int(binary_line[-4:], 2)
+        seat_ids.append(int((row_number * 8) + column_number))
+    return seat_ids
+
+
 def find_my_seat(seat_ids):
     '''Returns the missing number (that is not +1 from the last) in the list.'''
     sorted_seat_ids = sorted(seat_ids)
@@ -37,7 +48,7 @@ def find_my_seat(seat_ids):
 if __name__ == "__main__":
     start_time = timeit.default_timer()
     lines = read_file("input.txt")
-    seat_ids = binary_boarding(lines, 128, 8)
+    seat_ids = binary_boarding_improved(lines)
     print("Challenge 1 Answer:", max(seat_ids))
     print("Challenge 2 Answer:", find_my_seat(seat_ids))
     print("Time taken: %s" % (timeit.default_timer() - start_time))
