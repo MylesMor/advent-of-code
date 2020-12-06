@@ -28,12 +28,8 @@ def custom_customs2(groups):
     total_yes = 0
     for group in groups:
         individuals = group.split(" ")[:-1]
-        if len(individuals) == 1:
-            total_yes += len(individuals[0])
-            continue
-        else:
-            individuals_sets = [set(individual) for individual in individuals]
-            total_yes += len(set.intersection(*individuals_sets))
+        individuals_sets = [set(individual) for individual in individuals]
+        total_yes += len(set.intersection(*individuals_sets))
     return total_yes
 
 
