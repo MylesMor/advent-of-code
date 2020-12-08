@@ -23,7 +23,8 @@ def handheld_halting(instructions):
             return (False, accumalator)
         if len(instructions)-1 in visited:
             return (True, accumalator)
-        operation, counter = instructions[index].split(" ")[0], int(instructions[index].split(" ")[1])
+        split_instruction = instructions[index].split(" ")
+        operation, counter = split_instruction[0], int(split_instruction[1])
         visited.append(index)
         if operation == "nop":
             index += 1
@@ -40,7 +41,8 @@ def stop_loop(instructions):
     '''Swaps a jmp/nop instruction one-by-one until program terminates.'''
     for count, instruction in enumerate(instructions):
         new_instructions = instructions.copy()
-        operation, counter = instruction.split(" ")[0], int(instruction.split(" ")[1])
+        split_instruction = instruction.split(" ")
+        operation, counter = split_instruction[0], int(split_instruction[1])
         if operation == "jmp":
             new_instructions[count] = "nop " + str(counter)
             result = handheld_halting(new_instructions)
