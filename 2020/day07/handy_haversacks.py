@@ -19,7 +19,7 @@ def read_file(filename):
 def handy_haversacks(bags, type_of_bag):
     final_bags = []
     for bag_to_find in type_of_bag:
-        final_bags.extend([bag for bag in bags if bag_to_find in (inside_bag[2:] for inside_bag in bags[bag])])
+        final_bags.extend([bag for bag in bags if bag_to_find in (inside_bag.split(" ", 1)[1] for inside_bag in bags[bag])])
     if len(final_bags) == 0:
         return final_bags
     return final_bags + (handy_haversacks(bags, final_bags))
@@ -32,8 +32,9 @@ def handy_haversacks2(bags, bag_dict):
         for bag in bags:
             if bag_to_find in bag:
                 for inside_bag in bags[bag]:
-                    final_bags[inside_bag[2:]] += int(bag_dict[bag_to_find]) * int(inside_bag[:1])
-                    number_of_bags += int(bag_dict[bag_to_find]) * int(inside_bag[:1])
+                    number_of_inside_bags = inside_bag.split(" ", 1)[0]
+                    final_bags[inside_bag[2:]] += int(bag_dict[bag_to_find]) * int(number_of_inside_bags)
+                    number_of_bags += int(bag_dict[bag_to_find]) * int(number_of_inside_bags)
     if len(final_bags) == 0:
         return number_of_bags
     return number_of_bags + handy_haversacks2(bags, final_bags)
