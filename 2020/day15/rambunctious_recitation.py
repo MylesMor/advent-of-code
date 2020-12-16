@@ -14,18 +14,15 @@ def rambunctious_recitation(data, value_to_find):
     '''Returns the value_to_find'th number in the sequence.'''
     numbers = defaultdict(lambda: 0)
     number_list = data.copy()
-    count = 1
-    for number in data:
-        numbers[number] = count
-        count += 1
-    while count < value_to_find + 2:
-        last_number = number_list[count-2]
+    for count, number in enumerate(data):
+        numbers[number] = count+1
+    for i in range(len(data), value_to_find + 2):
+        last_number = number_list[i-1]
         if last_number not in numbers:
             number_list.append(0)
         else:
-            number_list.append((count-1) - numbers[last_number])
-        numbers[last_number] = count-1
-        count += 1
+            number_list.append(i - numbers[last_number])
+        numbers[last_number] = i
     return number_list[value_to_find-1]
 
 
