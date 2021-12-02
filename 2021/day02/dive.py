@@ -1,7 +1,7 @@
 import timeit 
 
 def read_file(input):
-    '''Returns a list of integers from a file.'''
+    '''Reads the file and returns data in suitable format.'''
     data = []
     with open(input, "r") as file:
         for line in file:
