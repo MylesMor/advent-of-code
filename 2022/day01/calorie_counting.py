@@ -2,7 +2,6 @@ import timeit
 from collections import defaultdict
 
 def read_file(filename):
-    '''Returns a list of integers from a file.'''
     numbers = []
     with open(filename, "r") as file:
         total = 0
