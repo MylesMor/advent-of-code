@@ -8,14 +8,19 @@ def read_file(filename):
     instructions = []
     with open(filename, "r") as file:
         lines = file.readlines()
+        # for parsing the stack input, traverse backwards from bottom of grid
         for line in lines[::-1]:
             line = line.replace("\n", "")
+            # if the line is part of the stack input
             if '[' in line:
+                # split the line into a list of items on the bottom of each stack
                 row = [line[x:x+3].strip() for x in range(0, len(line), 4)]
                 for x in range(len(row)):
                     if row[x] != "":
+                        # place each item on it's relevant stack
                         stacks[x+1].extend([row[x][1]])
         for line in lines:
+            # retrieves and formats the instructions
             if line.startswith("move"):
                 parts = line.strip().split(" ")
                 instructions.append([int(parts[1]), int(parts[3]), int(parts[5])])
@@ -26,10 +31,13 @@ def supply_stacks(lines, part_one=True):
     stacks, instructions = lines[0], lines[1]
     for instruction in instructions:
         popped = []
+        # collect removed items one-by-one
         for _ in range(instruction[0]):
             popped.append(stacks[instruction[1]].pop())
+        # for part one, they're already in right order so directly extend the stack with popped
         if part_one:
             stacks[instruction[2]].extend(popped)
+        # for part two, reverse popped list to get them in the correct order
         else:
             stacks[instruction[2]].extend(popped[::-1])
     final_string = ""
