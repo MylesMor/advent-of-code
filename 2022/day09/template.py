@@ -46,7 +46,7 @@ def rope_bridge(lines, tail_size=1, track_tail=1):
 
                     # If the tail part being tracked hasn't visited this position
                     # before, append it to the list
-                    if rope[i] not in tail_positions and i == track_tail:
+                    if i == track_tail and rope[i] not in tail_positions:
                         tail_positions.append(rope[i][:])
 
     return len(tail_positions)
