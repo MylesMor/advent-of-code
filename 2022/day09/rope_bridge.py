@@ -8,7 +8,7 @@ def read_file(filename):
 
 def rope_bridge(lines, tail_size=1, track_tail=1):
     rope = [[0, 0] for _ in range(0, tail_size+1)]
-    tail_positions = [rope[0][:]]
+    tail_positions = [tuple(rope[0][:])]
     
     for line in lines:
         direction, amount = line[0], int(line[1])
@@ -44,12 +44,11 @@ def rope_bridge(lines, tail_size=1, track_tail=1):
                         rope[i][0] += 1 if rope[i-1][0] > rope[i][0] else -1
                         rope[i][1] += 1 if rope[i-1][1] > rope[i][1] else -1
 
-                    # If the tail part being tracked hasn't visited this position
-                    # before, append it to the list
-                    if i == track_tail and rope[i] not in tail_positions:
-                        tail_positions.append(rope[i][:])
+                    # If this current part is the tail part being tracked
+                    if i == track_tail:
+                        tail_positions.append(tuple(rope[i][:]))
 
-    return len(tail_positions)
+    return len(set(tail_positions))
         
 
 if __name__ == "__main__":
