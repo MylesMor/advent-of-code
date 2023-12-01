@@ -46,6 +46,21 @@ def trebuchet_2(lines):
         if len(numbers) > 0:
             final_calibration += int(f'{numbers[0]}{numbers[-1]}')
     return final_calibration
+
+
+def trebuchet_2_clever(lines):
+    valid_word_numbers = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine']
+    final_calibration = 0
+    for line in lines:
+
+        # Insert number as second letter of number word (e.g, o1ne, t2wo, t3hree)
+        for count, word in enumerate(valid_word_numbers):
+            line.replace(word, f'{word[1:]}{count+1}{word[1:]}')
+        
+        numbers = re.sub('[A-z]', '', line)
+        if len(numbers) > 0:
+            final_calibration += int(f'{numbers[0]}{numbers[-1]}')
+    return final_calibration
     
 
 if __name__ == "__main__":
@@ -59,4 +74,5 @@ if __name__ == "__main__":
     lines = read_file("input.txt")
     print(f'Challenge 1 Answer: {trebuchet(lines)}')
     print(f'Challenge 2 Answer: {trebuchet_2(lines)}')
+    print(f'Challenge 2 (clever) Answer: {trebuchet_2(lines)}')
     print("Time taken: %s" % (round(timeit.default_timer() - start_time, 8)))
